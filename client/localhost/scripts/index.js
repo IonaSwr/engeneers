@@ -1,4 +1,6 @@
 var Bahur;
+var frames = [0,1,2,3,4];
+var curentFrame = 0;
 
 window.onload = function(){
 
@@ -35,5 +37,16 @@ window.onload = function(){
 function render(){
     bahur.style.top = Bahur.mikum.y;
     bahur.style.left = Bahur.mikum.x;
+    curentFrame++;
+    if(curentFrame > frames.length-1)
+        curentFrame = 0;
+    
+    var engenneers = document.getElementsByClassName('engeneer')
+    for(var i=0 ; i <engenneers.length ; i++ )
+        engenneers[i].style.display = 'none'
+
+    var engenneer = document.getElementById('bahur_' + curentFrame)
+
+    engenneer.style.display = 'block'
 }
 
