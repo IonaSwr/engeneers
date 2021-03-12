@@ -1,0 +1,24 @@
+{
+  "name": "engeneers",
+  "version": "1.0.0",
+  "description": "engeneers multy player game",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IonaSwr/engeneers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IonaSwr/engeneers/issues"
+  },
+  "homepage": "https://github.com/IonaSwr/engeneers#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "vhost": "^3.0.2"
+  }
+}
