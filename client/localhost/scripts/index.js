@@ -1,6 +1,10 @@
 var Bahur;
 var frames = [0,1,2,3,4];
 var curentFrame = 0;
+var isRunning = false;
+var direectionX = 0;//1 or -1 
+var direectionY = 0; 
+var frameCount = 0 ;
 
 window.onload = function(){
 
@@ -12,35 +16,67 @@ window.onload = function(){
 
     document.onkeydown = function(el,s)
     {
+        isRunning = true;
         if(el.key == 'ArrowUp')
         {
-            Bahur.mikum.y --;
+            direectionY = -4;
         }
         if(el.key == 'ArrowDown')
         {
-            Bahur.mikum.y ++;
+            direectionY = 4
+            
         }
         if(el.key == 'ArrowLeft')
         {
-            Bahur.mikum.x --;
+            direectionX = -4;
+            
         }
         if(el.key == 'ArrowRight')
         {
-            Bahur.mikum.x ++;
+            direectionX = 4;            
         }
 
-        render();
+        
+    }
+
+    document.onkeyup = function(el)
+    {
+        isRunning = false;
+        direectionX = 0;//1 or -1 
+        direectionY = 0; 
+
     }
 
 }
 
+setInterval(function () {
+    
+
+    if(isRunning == true)
+    {
+  
+        Bahur.mikum.y += direectionY;
+        Bahur.mikum.x += direectionX;
+   
+    }
+    render();
+  }, 40);
+
+var runningFrames = [1,1,1,2,3,3,3,4];
+
 function render(){
     bahur.style.top = Bahur.mikum.y;
     bahur.style.left = Bahur.mikum.x;
-    curentFrame++;
-    if(curentFrame > frames.length-1)
-        curentFrame = 0;
     
+    if(isRunning)
+    {
+        frameCount++;        
+        if(frameCount > runningFrames.length-1)
+            frameCount = 0;
+        curentFrame=runningFrames[frameCount];
+    }
+    else 
+        curentFrame =0;
     var engenneers = document.getElementsByClassName('engeneer')
     for(var i=0 ; i <engenneers.length ; i++ )
         engenneers[i].style.display = 'none'
