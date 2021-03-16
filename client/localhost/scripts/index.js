@@ -5,11 +5,13 @@ var isRunning = false;
 var direectionX = 0;//1 or -1 
 var direectionY = 0; 
 var frameCount = 0 ;
+var rightDirection = true;
 
 window.onload = function(){
 
     Bahur = {
-        mikum:{x:200,y:200}
+        mikum:{x:200,y:200},
+        
     }
     
     render();
@@ -19,21 +21,22 @@ window.onload = function(){
         isRunning = true;
         if(el.key == 'ArrowUp')
         {
-            direectionY = -4;
+            direectionY = -8;
         }
         if(el.key == 'ArrowDown')
         {
-            direectionY = 4
+            direectionY = 8;
             
         }
         if(el.key == 'ArrowLeft')
         {
-            direectionX = -4;
-            
+            direectionX = -8;
+            rightDirection = false
         }
         if(el.key == 'ArrowRight')
         {
-            direectionX = 4;            
+            direectionX = 8;  
+            rightDirection = true;          
         }
 
         
@@ -41,9 +44,14 @@ window.onload = function(){
 
     document.onkeyup = function(el)
     {
-        isRunning = false;
-        direectionX = 0;//1 or -1 
-        direectionY = 0; 
+        if(el.key == 'ArrowUp' || el.key == 'ArrowDown' )
+            direectionY = 0; 
+        if(el.key == 'ArrowRight' || el.key == 'ArrowLeft' )
+            direectionX = 0; 
+
+        if(direectionX == 0 && direectionY == 0)
+            isRunning = false;
+        
 
     }
 
@@ -62,10 +70,11 @@ setInterval(function () {
     render();
   }, 40);
 
-var runningFrames = [1,1,1,2,3,3,3,4];
+var runningFrames = [1,1,1,1,1,2,3,3,3,3,3,4];
+var jumpingFrames = [3,8,9,8,3,0,3,8,9,8,3,0];
 
 function render(){
-    bahur.style.top = Bahur.mikum.y;
+    
     bahur.style.left = Bahur.mikum.x;
     
     if(isRunning)
@@ -74,15 +83,23 @@ function render(){
         if(frameCount > runningFrames.length-1)
             frameCount = 0;
         curentFrame=runningFrames[frameCount];
+        bahur.style.top = Bahur.mikum.y - jumpingFrames[frameCount];
     }
     else 
+    {        
+        bahur.style.top = Bahur.mikum.y;
         curentFrame =0;
+    }
     var engenneers = document.getElementsByClassName('engeneer')
     for(var i=0 ; i <engenneers.length ; i++ )
         engenneers[i].style.display = 'none'
 
-    var engenneer = document.getElementById('bahur_' + curentFrame)
+    var engenneer;
+        if(rightDirection ==false)
+            engenneer = document.getElementById('bahur_' + curentFrame)
+        else
+            engenneer = document.getElementById('right_bahur_' + curentFrame)
 
-    engenneer.style.display = 'block'
+    engenneer.style.display = 'block';
 }
 
