@@ -7,8 +7,17 @@ Engeneers multy player game
 Installation :
 
 git clone https://github.com/IonaSwr/engeneers
+
+//////////////////
+
 cd engeneers
+
+//////////////////
+
 npm i
+
+//////////////////
+
 npm start
 
 //////////////////
